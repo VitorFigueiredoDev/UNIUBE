@@ -1,0 +1,138 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap');
+
+body {
+    margin: 0;
+    font-family: "Poppins", sans-serif;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+header {
+    background-color: rgb(63, 70, 107);
+    padding: 10px;
+}
+
+.bnt {
+    color: rgb(0, 0, 0);
+    padding: 10px 20px;
+    border-radius: 0.5rem;
+    border: 1px solid white;
+    box-shadow: 0px 2px 4px 0px rgba(0, 0, 0, 0.3);
+    display: inline-block;
+    font-size: 16px;
+    cursor: pointer;
+    padding: 10px 10px;
+    
+}
+
+.navbar {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.texto {
+    font-size: 30px;
+    font-weight: 600;
+}
+
+.main-container {
+    display: flex;
+    flex: 1;
+}
+
+.sidebar {
+    display: flex;
+    width: 100px;
+    background-color: #f4f4f4;
+    padding: 15px;
+    box-shadow: 2px 0 5px rgba(0,0,0,0.1);
+    justify-content: center;
+}
+
+.sidebar nav ul {
+    list-style: none;
+    padding: 0;
+}
+
+.sidebar nav ul li {
+    margin-bottom: 10px;
+}
+
+.sidebar nav ul li a {
+    text-decoration: none;
+    color: #333;
+    font-weight: bold;
+}
+
+.content {
+    flex: 1;
+    padding: 15px;
+    border: 1px solid #ccc;
+    background-color: #fff;
+}
+
+.form {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    width: 300px;
+    margin: 0 auto;
+}
+
+.form label {
+    display: block;
+    margin: 10px 0 5px;
+    font-weight: bold;
+    color: #333;
+}
+
+.form input[type="text"],
+.form input[type="password"] {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+.form input[type="submit"] {
+    background-color: #4CAF50;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.form input[type="submit"]:hover {
+    background-color: #45a049;
+}
+
+
+.error-message {
+    color: red; /* Red text color for the error */
+    background-color: #f8d7da; /* Light red background */
+    border: 1px solid #f5c6cb; /* Border color */
+    padding: 10px; /* Some padding */
+    border-radius: 4px; /* Rounded corners */
+    margin-top: 15px; /* Space above the error message */
+    display: none; /* Hidden by default */
+}
+
+.error-message:empty {
+    display: none; /* Ensure it stays hidden if empty */
+}
+
+.error-message:not(:empty) {
+    display: block; /* Show it if it has text */
+}
+
+
