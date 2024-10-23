@@ -1,18 +1,22 @@
 <?php
 include("conexao.php");
+include("validacoes.php");
 
-$cpf = $_POST["cpf"];
-$nome = $_POST["nome"];
-$senha = $_POST["senha"]; 
-$cpfanterior = $_POST["cpfanterior"];
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+    $cpf = $_POST["cpf"];
+    $nome = $_POST["nome"];
+    $senha = $_POST["senha"];
+    $cpfanterior = $_POST["cpfanterior"];
 
-$sql = "update usuarios set cpf = '$cpf', 
-                            senha = '$senha',
-                            nome = '$nome' 
-                            where cpf = '$cpfanterior'";
+    // Usar prepared statements para prevenir SQL injection
+    $stmt = $conn->prepare("UPDATE usuarios SET cpf = ?, senha = ?, nome = ? WHERE cpf = ?");
+    $stmt->bind_param("ssss", $cpf, $senha, $nome, $cpfanterior);
 
-if(!$resultado = $conn->query($sql)){
-    die("erro");
+    if (!$stmt->execute()) {
+        die("Erro ao atualizar: " . $stmt->error);
+    }
+
+    header("Location: cadastrarusuarios.php");
+    exit();
 }
-header("Location: cadastrarusuarios.php");
-
+?>
