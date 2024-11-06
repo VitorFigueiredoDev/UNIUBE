@@ -10,14 +10,45 @@ include("validacoes.php");
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cadastro de Usuários</title>
     <link rel="stylesheet" href="style.css">
+    <script>
+        function validarFormulario() {
+            const cpf = document.getElementById('cpf').value;
+            const senha = document.getElementById('senha').value;
+
+            // Validação do CPF: apenas números e exatamente 11 dígitos
+            const cpfRegex = /^\d{11}$/;
+            if (!cpfRegex.test(cpf)) {
+                alert("CPF inválido. Certifique-se de que o CPF tenha exatamente 11 dígitos numéricos.");
+                return false;
+            }
+
+            // Validação da senha: pelo menos 1 número, 1 letra maiúscula, 1 letra minúscula e no mínimo 8 caracteres
+            const senhaRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{8,}$/;
+            if (!senhaRegex.test(senha)) {
+                alert("Senha inválida. A senha deve ter pelo menos 8 caracteres, incluindo uma letra maiúscula, uma letra minúscula e um número.");
+                return false;
+            }
+
+            return true; // Se todas as validações passarem, o formulário será enviado
+        }
+
+        // Função para alternar a visibilidade da senha
+        function mostrarSenha() {
+            const senhaInput = document.getElementById('senha');
+            const tipo = senhaInput.type === "password" ? "text" : "password";
+            senhaInput.type = tipo;
+        }
+    </script>
+
 </head>
 <body>
     <header>
         <nav class="navbar">
             <span style="color: white;" class="texto">Olá <?= htmlspecialchars($_SESSION['nome']); ?>, seja bem-vindo!</span>
-            <a style="text-decoration: none; color: rgb(255, 255, 255);" href="sair.php" title="Sair"><button class="bnt">Sair</button></a>
+            <a href="sair.php" title="Sair" style="text-decoration: none; color: white;"><button class="bnt">Sair</button></a>
         </nav>
     </header>
+
     <div class="main-container">
         <aside class="sidebar">
             <nav>
@@ -29,50 +60,68 @@ include("validacoes.php");
         </aside>
 
         <main class="content">
-            <h1>Cadastrar Usuários</h1>
 
-            <?php if (isset($_GET['erro'])): ?>
-                <div style="color: red;">
-                    <?php if ($_GET['erro'] == 'preencha_todos_os_campos') echo "Por favor, preencha todos os campos."; ?>
-                </div>
-            <?php endif; ?>
+        <h1>Cadastro de Usuários</h1>
 
-            <form class="form" method="post" action="cadastro.php" style="margin: 0 auto;">
-                CPF: <input placeholder="000.000.000-00" type="text" name="cpf" id="cpf" required><br>
-                SENHA: <input type="password" name="senha" id="senha" placeholder="1234" required><br>
-                NOME: <input placeholder="JoseBonifacio" type="text" name="nome" id="nome" required><br>
-                <input type="submit" value="Cadastrar">
-            </form>
-        </main>
+<form class="form-cadastro" method="post" action="cadastro.php" onsubmit="return validarFormulario()">
+    <label for="nome">Nome:</label>
+    <input type="text" id="nome" name="nome" placeholder="José Bonifácio" required>
 
-        <aside>
-        <main class="content">
-            <h1>Listagem Usuários</h1>
+    <label for="cpf">CPF:</label>
+    <input type="text" id="cpf" name="cpf" placeholder="00000000000" required>
+
+    <label for="senha">Senha:</label>
+    <input type="password" id="senha" name="senha" placeholder="Senha" required>
+
+    <label>
+        <input type="checkbox" onclick="mostrarSenha()"> Mostrar senha
+    </label>
+
+    <input type="submit" value="Cadastrar">
+</form>
+
+
+
+            <h1>Listagem de Usuários</h1>
+
             <?php
+            // Consultando os usuários no banco de dados
             $sql = "SELECT * FROM usuarios";
             $resultado = $conn->query($sql);
             ?>
-            <table class="tabela">
-                <tr>
-                    <td>CPF</td>
-                    <td>Nome</td>
-                    <td>Senha</td>
-                    <td>Alterar</td>
-                </tr>
-                <?php while ($row = $resultado->fetch_assoc()): ?>
-                <tr>
-                   <form method="post" action="alterarusuario.php">
-                    <input type="hidden" name="cpfanterior" value="<?= htmlspecialchars($row['cpf']); ?>">
-                    <td><input type="text" name="nome" value="<?= htmlspecialchars($row['nome']); ?>" required></td>
-                    <td><input type="text" name="cpf" value="<?= htmlspecialchars($row['cpf']); ?>" required></td>
-                    <td><input type="text" name="senha" value="<?= htmlspecialchars($row['senha']); ?>" required></td>
-                    <td><input type="submit" value="Alterar"></td>
-                   </form>
-                </tr>
-                <?php endwhile; ?>
+
+            <table class="tabela-usuarios">
+                <thead>
+                    <tr>
+                        <th>Nome</th>
+                        <th>CPF</th>
+                        <th>Senha</th>
+                        <th>Ações</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <?php while ($row = $resultado->fetch_assoc()): ?>
+                        <tr>
+                            <td><?= htmlspecialchars($row['nome']); ?></td>
+                            <td><?= htmlspecialchars($row['cpf']); ?></td>
+                            <td><?= htmlspecialchars($row['senha']); ?></td>
+                            <td class="acoes">
+                                <form method="post" action="alterarusuario.php" class="form-alterar" style="display: inline;">
+                                    <input type="hidden" name="cpfanterior" value="<?= htmlspecialchars($row['cpf']); ?>">
+                                    <button type="submit">Alterar</button>
+                                </form>
+                                <form method="post" action="deletarusuario.php" class="form-deletar" style="display: inline;">
+                                    <input type="hidden" name="cpf" value="<?= htmlspecialchars($row['cpf']); ?>">
+                                    <button type="submit" class="deletar">Deletar</button>
+                                </form>
+                            </td>
+                        </tr>
+                    <?php endwhile; ?>
+                </tbody>
             </table>
+
+            
         </main>
-        </aside>
     </div>
 </body>
 </html>

@@ -13,10 +13,31 @@ if (empty($cpf) || empty($senha) || empty($nome)) {
     exit();
 }
 
-// Caso todos os campos estejam preenchidos, insira os dados
-$sql = "INSERT INTO usuarios (cpf, nome, senha) VALUES ('$cpf', '$nome', '$senha')";
+// Prepara a consulta SQL para evitar SQL Injection
+$sql = "INSERT INTO usuarios (cpf, nome, senha) VALUES (?, ?, ?)";
 
-$resultado = $conn->query($sql);
-header("Location: cadastrarusuarios.php");
+// Prepara o statement
+$stmt = $conn->prepare($sql);
+
+// Verifica se a preparação do statement foi bem-sucedida
+if ($stmt === false) {
+    // Se falhar, exibe um erro
+    die("Erro na preparação do statement: " . $conn->error);
+}
+
+// Faz o binding dos parâmetros e executa o statement
+$stmt->bind_param("sss", $cpf, $nome, $senha);
+
+// Executa a consulta
+if ($stmt->execute()) {
+    // Redireciona para a página com mensagem de sucesso
+    header("Location: cadastrarusuarios.php?sucesso=cadastro_realizado");
+} else {
+    // Se a execução falhar, redireciona com erro
+    header("Location: cadastrarusuarios.php?erro=erro_ao_cadastrar");
+}
+
+// Fecha o statement
+$stmt->close();
 exit();
 ?>

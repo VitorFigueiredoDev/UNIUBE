@@ -1,138 +1,226 @@
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap');
 
-body {
-    margin: 0;
-    font-family: "Poppins", sans-serif;
-    display: flex;
-    flex-direction: column;
-    min-height: 100vh;
-}
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap');
 
-header {
-    background-color: rgb(63, 70, 107);
-    padding: 10px;
-}
-
-.bnt {
-    color: rgb(0, 0, 0);
-    padding: 10px 20px;
-    border-radius: 0.5rem;
-    border: 1px solid white;
-    box-shadow: 0px 2px 4px 0px rgba(0, 0, 0, 0.3);
-    display: inline-block;
-    font-size: 16px;
-    cursor: pointer;
-    padding: 10px 10px;
+    body {
+        margin: 0;
+        font-family: "Poppins", sans-serif;
+        display: flex;
+        flex-direction: column;
+        min-height: 100vh;
+        background-image: url('walpapr.jpg'); 
+        background-size: cover;
+        background-position: center;
+    }
     
-}
 
-.navbar {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
-}
+    header {
+        background-color: rgb(63, 70, 107);
+        padding: 10px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
 
-.texto {
-    font-size: 30px;
-    font-weight: 600;
-}
+    .bnt {
+        color: rgb(0, 0, 0);
+        padding: 10px 20px;
+        border-radius: 0.5rem;
+        border: 1px solid white;
+        box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.3);
+        font-size: 16px;
+        cursor: pointer;
+        background-color: white;
+        transition: background-color 0.3s ease;
+    }
 
-.main-container {
-    display: flex;
-    flex: 1;
-}
+    .bnt:hover {
+        background-color: #e0e0e0;
+    }
 
-.sidebar {
-    display: flex;
-    width: 100px;
-    background-color: #f4f4f4;
-    padding: 15px;
-    box-shadow: 2px 0 5px rgba(0,0,0,0.1);
-    justify-content: center;
-}
+    .navbar {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+    }
 
-.sidebar nav ul {
-    list-style: none;
-    padding: 0;
-}
+    .texto {
+        font-size: 24px;
+        font-weight: 600;
+        color: white;
+    }
 
-.sidebar nav ul li {
-    margin-bottom: 10px;
-}
+    .main-container {
+        display: flex;
+        flex: 1;
+        padding: 20px;
+        justify-content: space-between;
+    }
 
-.sidebar nav ul li a {
-    text-decoration: none;
-    color: #333;
-    font-weight: bold;
-}
+    .sidebar {
+        width: 250px;
+        background-color: #2d2d2d;
+        padding: 20px;
+        color: #fff;
+        box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+        border-radius: 8px;
+    }
 
-.content {
-    flex: 1;
-    padding: 15px;
-    border: 1px solid #ccc;
-    background-color: #fff;
-}
+    .sidebar nav ul {
+        list-style: none;
+        padding: 0;
+    }
 
-.form {
-    background-color: #fff;
-    padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    width: 300px;
-    margin: 0 auto;
-}
+    .sidebar nav ul li {
+        margin: 15px 0;
+    }
 
-.form label {
-    display: block;
-    margin: 10px 0 5px;
-    font-weight: bold;
-    color: #333;
-}
+    .sidebar nav ul li a {
+        color: #fff;
+        text-decoration: none;
+        font-weight: bold;
+        font-size: 16px;
+        transition: color 0.3s ease;
+    }
 
-.form input[type="text"],
-.form input[type="password"] {
-    width: 100%;
-    padding: 10px;
-    margin-bottom: 15px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    box-sizing: border-box;
-}
+    .sidebar nav ul li a:hover {
+        color: #64b5f6;
+    }
 
-.form input[type="submit"] {
-    background-color: #4CAF50;
-    color: white;
-    padding: 10px 20px;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-    font-size: 16px;
-    width: 100%;
-    box-sizing: border-box;
-}
+    .content {
+        flex: 1;
+        padding: 30px;
+        background-color: #fff;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        border-radius: 8px;
+        margin-left: 20px;
+    }
 
-.form input[type="submit"]:hover {
-    background-color: #45a049;
-}
+    h1 {
+        font-size: 2rem;
+        margin-bottom: 20px;
+        color: #333;
+    }
 
+    .form-cadastro {
+        background-color: #fff;
+        padding: 30px;
+        border-radius: 8px;
+        box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+        width: 100%;
+        max-width: 450px;
+        margin: 20px auto;
+    }
 
-.error-message {
-    color: red; /* Red text color for the error */
-    background-color: #f8d7da; /* Light red background */
-    border: 1px solid #f5c6cb; /* Border color */
-    padding: 10px; /* Some padding */
-    border-radius: 4px; /* Rounded corners */
-    margin-top: 15px; /* Space above the error message */
-    display: none; /* Hidden by default */
-}
+    .form-cadastro h2 {
+        text-align: center;
+        font-size: 1.5rem;
+        margin-bottom: 20px;
+        color: #333;
+    }
 
-.error-message:empty {
-    display: none; /* Ensure it stays hidden if empty */
-}
+    .form-cadastro label {
+        display: block;
+        margin-bottom: 10px;
+        font-weight: bold;
+        color: #333;
+        font-size: 14px;
+    }
 
-.error-message:not(:empty) {
-    display: block; /* Show it if it has text */
-}
+    .form-cadastro input[type="text"],
+    .form-cadastro input[type="password"],
+    .form-cadastro input[type="submit"] {
+        width: 100%;
+        padding: 12px;
+        margin-bottom: 20px;
+        border-radius: 6px;
+        border: 1px solid #ddd;
+        font-size: 16px;
+        box-sizing: border-box;
+        transition: border-color 0.3s ease;
+    }
 
+    .form-cadastro input[type="submit"] {
+        background-color: #4CAF50;
+        color: white;
+        cursor: pointer;
+        font-size: 16px;
+        box-sizing: border-box;
+        border: none;
+    }
 
+    .form-cadastro input[type="submit"]:hover {
+        background-color: #45a049;
+    }
+
+    .form-cadastro input[type="text"]:focus,
+    .form-cadastro input[type="password"]:focus {
+        border-color: #64b5f6;
+    }
+
+    .tabela-usuarios {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 30px;
+    }
+
+    .tabela-usuarios th, .tabela-usuarios td {
+        padding: 12px;
+        text-align: left;
+        border: 1px solid #ddd;
+        font-size: 16px;
+    }
+
+    .tabela-usuarios th {
+        background-color: #4CAF50;
+        color: white;
+        font-weight: bold;
+    }
+
+    .tabela-usuarios tr:nth-child(even) {
+        background-color: #f9f9f9;
+    }
+
+    .tabela-usuarios tr:hover {
+        background-color: #f1f1f1;
+    }
+
+    .acoes button {
+        padding: 8px 16px;
+        background-color: #007bff;
+        color: white;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+    }
+
+    .acoes button:hover {
+        background-color: #0056b3;
+    }
+
+    .acoes .deletar {
+        background-color: #dc3545;
+    }
+
+    .acoes .deletar:hover {
+        background-color: #c82333;
+    }
+
+    /* Estilos para mensagens de erro */
+    .error-message {
+        color: red;
+        background-color: #f8d7da;
+        border: 1px solid #f5c6cb;
+        padding: 10px;
+        border-radius: 4px;
+        margin-top: 15px;
+        display: none;
+        font-size: 14px;
+    }
+
+    .error-message:empty {
+        display: none;
+    }
+
+    .error-message:not(:empty) {
+        display: block;
+    }
